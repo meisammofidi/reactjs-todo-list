@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if(storedTodos) setTodos(storedTodos);
+    if (storedTodos) setTodos(storedTodos);
   }, []);
 
   useEffect(() => {
@@ -29,6 +29,12 @@ function App() {
     todoNameRef.current.value = null;
   };
 
+  const handleClearComplete = () => {
+    let newTodos = [...todos];
+    newTodos = newTodos.filter((t) => t.complete === false);
+    setTodos(newTodos);
+  };
+
   const toggleTodo = (id) => {
     const newTodos = [...todos];
     const todo = newTodos.find((todo) => todo.id === id);
@@ -38,10 +44,10 @@ function App() {
 
   return (
     <>
-      <div>TODO List</div>
+      <div>{todos.filter((t) => !t.complete).length} item(s) left</div>
       <input type="text" ref={todoNameRef} />
       <button onClick={handleAddTodo}>Add Todo</button>
-      <button>Clear Complete</button>
+      <button onClick={handleClearComplete}>Clear Complete</button>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
     </>
   );
