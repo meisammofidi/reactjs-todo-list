@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-function Todo({todo}) {
-    return (
-        <div>
-            {todo.name}
-        </div>
-    )
+function Todo({ todo }) {
+  return (
+    <div>
+      <label>
+        <input type="checkbox" />
+        {todo.name}
+      </label>
+    </div>
+  );
 }
 
-export default Todo
+export default Todo;
